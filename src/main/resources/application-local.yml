@@ -1,0 +1,58 @@
+server:
+  port: 8888
+  max-http-header-size: 67108864
+  servlet:
+    session:
+      tracking-modes: cookie
+      timeout: 86400
+      cookie:
+        http-only: true
+  compression:
+    enabled: true
+  tomcat:
+    accesslog:
+      enabled: true
+      buffered: false
+      request-attributes-enabled: true
+      directory: /var/duobei/zwt/logs
+      file-date-format: .yyyy-MM-dd
+      pattern: c %A - %l %h %u %t "%r" %s %b "%{Referer}i" "%{User-Agent}i" "%D"
+      prefix: access_log
+      suffix: .log
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://localhost:3306/java_scaffolding?useUnicode=true&characterEncoding=UTF-8&verifyServerCertificate=false&useSSL=false
+    username: root
+    password: 951106
+    driver-class-name: com.mysql.jdbc.Driver
+#    hikari:
+#      maximum-pool-size: 10
+#      connection-timeout: 20
+#      connection-test-query: select 1
+
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+
+  redis:
+    host: 192.168.0.62
+    port: 6379
+#    password: root
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm
+    time-zone: GMT+8
+
+  mvc:
+    static-path-pattern: /static/**
+    favicon:
+      enabled: false
+
+  thymeleaf:
+    cache: false
+
+logging:
+  config: classpath:logback.xml
