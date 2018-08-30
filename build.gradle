@@ -70,8 +70,9 @@ configurations {
 
 dependencies {
 
-    compile("org.projectlombok:lombok:$lombokVersion")
-
+    /**
+     * spring-boot相关
+     */
     compile("org.springframework.boot:spring-boot-starter-jetty")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
@@ -79,6 +80,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-aop")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-validation")
+    compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.1")
 
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-starter-data-redis")
@@ -86,14 +88,26 @@ dependencies {
     compile("org.thymeleaf.extras:thymeleaf-extras-springsecurity4:3.0.2.RELEASE")
     compile("org.springframework.session:spring-session-data-redis:2.0.2.RELEASE")
 
+    /**
+     * jpa 相关
+     */
     compile("com.querydsl:querydsl-core:$querydslVersion")
     compile("com.querydsl:querydsl-jpa:$querydslVersion")
 
     compile("ch.qos.logback:logback-core:${logbackVersion}")
+    compile("org.projectlombok:lombok:$lombokVersion")
+
+    /**
+     * mybatis 相关
+     */
+    compile("org.mybatis:mybatis-spring:1.3.1")
+
 
     compile("mysql:mysql-connector-java:5.1.44")
     compile("redis.clients:jedis:2.9.0")
     compile("com.zaxxer:HikariCP:2.7.3")
+
+
     compile("com.google.zxing:core:3.2.1")
     compile("com.google.code.gson:gson:2.8.2")
     compile("org.jsoup:jsoup:1.11.1")
@@ -102,15 +116,15 @@ dependencies {
     compile("commons-io:commons-io:2.6")
 
     compile("org.codehaus.jettison:jettison:1.3.8")
-    compile("commons-codec:commons-codec:1.11")
-    compile("commons-fileupload:commons-fileupload:1.3.3")
+    //compile("commons-codec:commons-codec:1.11")
+    //compile("commons-fileupload:commons-fileupload:1.3.3")
     compile("commons-beanutils:commons-beanutils:1.9.3")
     compile("org.apache.commons:commons-math3:3.6.1")
-    compile("org.mindrot:jbcrypt:0.4")
-    compile("com.sun.jna:jna:3.0.9")
-    compile("io.searchbox:jest:2.4.0")
-    compile("com.google.code.findbugs:jsr305:3.0.2")
-    compile("org.apache.tika:tika-core:1.16")
+    //compile("org.mindrot:jbcrypt:0.4")
+    //compile("com.sun.jna:jna:3.0.9")
+    //compile("io.searchbox:jest:2.4.0")
+    //compile("com.google.code.findbugs:jsr305:3.0.2")
+    //compile("org.apache.tika:tika-core:1.16")
     compile("dom4j:dom4j:1.6.1")
     compile("eu.bitwalker:UserAgentUtils:1.14")
     compile("commons-net:commons-net:3.6")

@@ -1,12 +1,12 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: zwt-repertory-http
+  name: 镜像名称-http
   namespace: zwt-web
 spec:
   selector:
     matchLabels:
-      app: zwt-repertory
+      app: 镜像名称
   replicas: 1
   strategy:
     rollingUpdate:
@@ -16,11 +16,11 @@ spec:
   template:
     metadata:
       labels:
-        app: zwt-repertory
+        app: 镜像名称
     spec:
       containers:
-        - name: zwt-repertory
-          image: registry.cn-beijing.aliyuncs.com/duobeiyun-web/zwt-repertory:v1.1.2
+        - name: 镜像名称
+          image: registry.cn-beijing.aliyuncs.com/镜像命名空间/镜像名称:v1.1.2
           imagePullPolicy: Always
           env:
           - name: JVM_MAX_MEMORY
@@ -55,8 +55,8 @@ metadata:
   annotations:
     service.kubernetes.io/qcloud-loadbalancer-clusterid: cls-m5q2cb1z
   labels:
-    name: zwt-repertory
-  name: zwt-repertory-http
+    name: 镜像名称
+  name: 镜像名称-http
   namespace: zwt-web
 spec:
   ports:
@@ -65,5 +65,5 @@ spec:
     targetPort: 18888
     nodePort: 31888
   selector:
-    app: zwt-repertory
+    app: 镜像名称
   type: NodePort

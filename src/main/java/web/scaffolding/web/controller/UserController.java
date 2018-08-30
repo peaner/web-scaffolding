@@ -3,16 +3,15 @@ package web.scaffolding.web.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import web.scaffolding.core.exception.ZwtException;
+import web.scaffolding.core.page.PageUtils;
 import web.scaffolding.web.advice.aop.DuplicateSubmitToken;
 import web.scaffolding.core.page.PageWrapper;
 import web.scaffolding.core.utils.EnhanceSecurityUtils;
@@ -34,6 +33,24 @@ public class UserController {
     public String loginPage() {
         return "login";
     }
+
+    // mybatis实现
+    @GetMapping("/user/mybatis")
+    @ResponseBody
+    public ResponseEntity getUser(@PageableDefault(size = 20, direction = Sort.Direction.DESC) Pageable pageable) {
+        UserSearchFormBean userSearchFormBean = new UserSearchFormBean();
+        try {
+            PageUtils<UserVO> page = userService.userList(pageable, userSearchFormBean);
+            return new ResponseEntity<>(page, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error(e.getMessage(), e);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+    // jpa 实现
 
     @GetMapping("/user")
     public String user(@PageableDefault Pageable pageable, @ModelAttribute UserSearchFormBean formBean, Model model) {

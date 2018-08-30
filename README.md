@@ -1,3 +1,4 @@
 # java-scaffolding
 ### Java脚手架
-- ssh框架+thymeleaf
+- springboot  ssh框架 thymeleaf 20180828
+- springboot  ssm框架 thymeleaf 20180830

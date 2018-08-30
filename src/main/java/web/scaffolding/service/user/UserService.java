@@ -10,8 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import web.scaffolding.core.exception.ExceptionCodeEnum;
 import web.scaffolding.core.exception.ZwtException;
+import web.scaffolding.core.page.PageUtils;
 import web.scaffolding.core.utils.ContentCleanUtils;
 import web.scaffolding.dao.UserRepository;
+import web.scaffolding.dao.mapper.UserMapper;
 import web.scaffolding.domain.QUser;
 import web.scaffolding.domain.User;
 import web.scaffolding.service.vo.UserVO;
@@ -22,7 +24,9 @@ import web.scaffolding.core.utils.BeanCopyUtils;
 import web.scaffolding.core.utils.QuerydslUtils;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -30,6 +34,10 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    // mybatis
+    @Autowired
+    private UserMapper userMapper;
 
     public PageWrapper<UserVO> page(Pageable pageable, UserSearchFormBean formBean, Long userId) {
         String mobile = formBean.getMobile();
@@ -194,5 +202,14 @@ public class UserService {
         } else {
             throw new ZwtException(ExceptionCodeEnum.USER_NOT_FOUND);
         }
+    }
+
+    public PageUtils<UserVO> userList(Pageable pageable, UserSearchFormBean userSearchFormBean) {
+        List<User> users = userMapper.getAll();
+        List<UserVO> userVOList = new ArrayList<>();
+        for (User user : users) {
+            userVOList.add(BeanCopyUtils.copy(user, UserVO.class));
+        }
+        return new PageUtils(pageable, userVOList, userVOList.size());
     }
 }

@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: 镜像名称
-          image: registry.cn-beijing.aliyuncs.com/duobeiyun-web/镜像名称:版本号
+          image: registry.cn-beijing.aliyuncs.com/镜像命名空间/镜像名称:版本号
           imagePullPolicy: Always
           env:
           - name: JVM_MAX_MEMORY
